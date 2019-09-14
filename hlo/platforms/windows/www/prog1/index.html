@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>       
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Hello World</title>
+        <style>
+            #Act{
+    background-color:#4B946A;
+    padding:5px;
+    border-radius:5px;
+    color: #fff;
+    font-weight: bolder;
+}
+#Act:active{
+    background-color:  #5Ba47A;
+}
+        </style>
+      <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+
+<script>
+    var arith=false; 
+    var au="_";
+    var int1=0.0;
+    var int2=0.0;
+    var result=0.0;
+    var val1='';
+    var val2='';
+    
+    $(document).ready(function(){
+  
+    function clear(){
+      int1=result;
+      val1=result.toString();
+      int2=0.0;
+      val2='';
+      
+      $("#i1").text(val1);
+      $("#i2").text(int2);
+      $(".result").text(result);
+    }
+    
+    function operate(){
+        switch(au){
+            case "+":result=int1+int2;
+            break;
+            case "-":result=int1-int2;
+            break;
+            case "/":result=int1/int2;
+            break;
+            case "X":result=int1*int2;
+            break;
+            default:alert('calculation error 1');
+            }
+            
+        $(".result").text(result);
+                        }
+  
+    $("#Act").click(function(){
+        $("#activity1").hide();
+        $("#activity2").show();
+                            });
+                            
+    $(".num").click(function(){
+        var val=$(this).text();
+     
+        if(arith){
+            val2=val2+val;
+            int2=parseFloat(val2);
+            $("#i2").text(val2);
+        operate();
+        }else{
+            val1=val1+val;
+            int1=parseFloat(val1);
+            $("#i1").text(val1);
+            $(".result").text(val1);
+        }
+  });
+  
+  $(".add").click(function(){
+      au="+";
+      $(".arithmatic").text(au);
+      if(arith){ clear();}
+      else{arith=true;}
+      operate();
+  });
+  $(".div").click(function(){
+      au="/";
+      $(".arithmatic").text(au);
+      if(arith){ clear();}
+      else{arith=true;}
+      //result=int1/int2;
+  });
+  $(".mul").click(function(){
+      au="X";
+      $(".arithmatic").text(au);
+      if(arith){ clear();}
+      else{arith=true;}
+      operate();
+  });
+  $(".subt").click(function(){
+      au="-";
+      $(".arithmatic").text(au);
+      if(arith){clear();}
+      else{arith=true;}
+      operate();
+  });
+  
+  
+  $(".clear").click(function(){
+      if(arith){
+          if(val2===''){
+              arith=false;
+              $(".arithmatic").text('');
+              au='_';
+          }else{
+              val2=val2.substring(0,val2.length-1);
+              if(val2.length!==0){       
+                int2=parseFloat(val2);
+                $("#i2").text(val2);
+              }else{
+                int2=0.0;
+                $("#i2").text(int2);
+              }  
+              operate();
+              
+          }
+      }else{
+          if(val1===''){
+              alert('empty values');
+          }else{
+              val1=val1.substring(0,val1.length-1);
+              if(val1.length!==0){
+              int1=parseFloat(val1);
+              $("#i1").text(val1);
+              }else{
+                int1=0.0;
+                $("#i1").text(int1);
+              }    
+          }         
+      }
+  });
+});
+</script>  
+    </head>
+    <body>
+        <div class="app" id="activity1">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">setting up application</p>
+                <p class="event received">application is Ready</p>
+                
+            </div>
+            <p id="Act">get Started</p>
+        </div>
+        <div class="activity" id="activity2">
+            <Acthead>Calculator</Acthead>
+            <div class="input">
+                <table style="width:100%">
+                    <tr>
+                        <td class="no"></td>
+                        <td id="i1" class="input">0</td>
+                    </tr>
+                    <tr>
+                        <td class="arithmatic"></td>
+                        <td id="i2" class="input">0</td>
+                    </tr>
+                    <tr style="">
+                   
+                        <td class="result" colspan="2">0</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="keypad">
+                <table cellspacing="10px" style="width:100%">
+                    <tr>
+                        <td class="num btn">1</td>
+                        <td class="num btn">2</td>
+                        <td class="num btn">3</td>
+                        <td class="div btn">/</td>
+                    </tr>
+                    <tr>
+                        <td class="num btn">4</td>
+                        <td class="num btn">5</td>
+                        <td class="num btn">6</td>
+                        <td class="mul btn">X</td>
+                    </tr>
+                    <tr>
+                        <td class="num btn">7</td>
+                        <td class="num btn">8</td>
+                        <td class="num btn">9</td>
+                        <td class="add btn">+</td>
+                    </tr>
+                    <tr>
+                        <td class="clear btn">&LeftTriangle;</td>
+                        <td class="num btn">0</td>
+                        <td class="num btn">.</td>
+                        <td class="subt btn">-</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        
+        
+    </body>
+</html>
